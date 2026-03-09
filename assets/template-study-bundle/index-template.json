@@ -1,0 +1,41 @@
+{
+  "tema": "[PLACEHOLDER: nome-do-dominio]",
+  "data": "YYYY-MM-DD",
+  "pipeline_mode": "full|abbreviated|skipped",
+  "estilo_comunicacao": "arquitetural|estrategico|investigativo|didatico",
+  "certeza_resumo": {
+    "verdade_absoluta": 0,
+    "provavel_forte": 0,
+    "provavel_fraca": 0,
+    "popular_sem_validacao": 0,
+    "indeterminado": 0
+  },
+  "perfil_execucao": {
+    "acesso_web": "total|parcial|indisponivel",
+    "citacao": "links|textuais|sem_citacao",
+    "ferramentas": true,
+    "memoria_persistente": true
+  },
+  "arquivos": [
+    "00-contexto.md",
+    "01-matriz-afirmacoes.csv",
+    "02-fontes.json",
+    "03-controversias.md",
+    "04-ausencias-alertas.md",
+    "05-mapa-conhecimento.md",
+    "06-manual-operacional.md",
+    "07-pacote-especialista.md",
+    "08-monitoramento.md"
+  ],
+  "gate_qualidade": {
+    "diagnostico_especifico": false,
+    "busca_3_niveis": false,
+    "triangulacao_minima": false,
+    "controversias_documentadas": false,
+    "busca_ausencia": false,
+    "grafo_construido": false,
+    "produtos_nivel6": false,
+    "certeza_comunicada": false,
+    "limitacoes_declaradas": false
+  }
+}

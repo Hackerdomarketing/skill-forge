@@ -68,6 +68,7 @@ class Validador:
         self._validar_frontmatter()
         self._validar_descricao()
         self._validar_corpo()
+        self._validar_pipeline()
         self._validar_scripts()
         self._validar_references()
         self._validar_assets()
@@ -136,7 +137,7 @@ class Validador:
             print("🏷️  Validando frontmatter...")
         
         # Campos permitidos
-        CAMPOS_PERMITIDOS = {'name', 'description', 'license', 'allowed-tools', 'metadata', 'compatibility'}
+        CAMPOS_PERMITIDOS = {'name', 'description', 'license', 'allowed-tools', 'metadata', 'compatibility', 'pipeline'}
         campos_extras = set(self.frontmatter.keys()) - CAMPOS_PERMITIDOS
         if campos_extras:
             self.erro(f"Campos não reconhecidos no frontmatter: {', '.join(campos_extras)}")
@@ -240,6 +241,65 @@ class Validador:
         if re.search(r'##.*quando usar|when to use', corpo, re.IGNORECASE):
             self.aviso("Seção 'Quando Usar' deveria estar na descrição do frontmatter, não no corpo")
     
+    def _validar_pipeline(self):
+        """Valida campo opcional 'pipeline' no frontmatter e artefatos correspondentes."""
+        pipeline = self.frontmatter.get('pipeline')
+        if pipeline is None:
+            return
+
+        if self.verbose:
+            print("🔬 Validando pipeline...")
+
+        if not isinstance(pipeline, dict):
+            self.erro(f"Campo 'pipeline' deve ser um dicionário, não {type(pipeline).__name__}")
+            return
+
+        # Validate 'path' field
+        pipeline_path = pipeline.get('path')
+        if not pipeline_path:
+            self.erro("Campo 'pipeline.path' é obrigatório quando pipeline está presente")
+        elif pipeline_path not in ('fast', 'medium', 'deep'):
+            self.erro(f"pipeline.path deve ser 'fast', 'medium' ou 'deep', não '{pipeline_path}'")
+        else:
+            self.sucesso(f"pipeline.path válido: {pipeline_path}")
+
+        # Validate 'triage_score' field
+        triage_score = pipeline.get('triage_score')
+        if triage_score is None:
+            self.erro("Campo 'pipeline.triage_score' é obrigatório quando pipeline está presente")
+        elif not isinstance(triage_score, (int, float)):
+            self.erro(f"pipeline.triage_score deve ser número, não {type(triage_score).__name__}")
+        else:
+            self.sucesso(f"pipeline.triage_score válido: {triage_score}")
+
+        # Validate workspace directory exists when pipeline field is present
+        workspace_dir = self.caminho / 'workspace'
+        if not workspace_dir.exists():
+            self.aviso("pipeline declarado no frontmatter mas diretório workspace/ não encontrado")
+        else:
+            self.sucesso("workspace/ encontrado")
+
+            # Check for triage.json
+            triage_json = workspace_dir / 'triage.json'
+            if not triage_json.exists():
+                self.aviso("workspace/triage.json não encontrado")
+
+            # Check for stage-a-study/ when medium or deep
+            if pipeline_path in ('medium', 'deep'):
+                stage_a = workspace_dir / 'stage-a-study'
+                if not stage_a.exists():
+                    self.aviso(f"pipeline.path='{pipeline_path}' mas workspace/stage-a-study/ não encontrado")
+                else:
+                    self.sucesso("workspace/stage-a-study/ encontrado")
+
+            # Check for stage-b-dissection/ when deep
+            if pipeline_path == 'deep':
+                stage_b = workspace_dir / 'stage-b-dissection'
+                if not stage_b.exists():
+                    self.aviso("pipeline.path='deep' mas workspace/stage-b-dissection/ não encontrado")
+                else:
+                    self.sucesso("workspace/stage-b-dissection/ encontrado")
+
     def _validar_scripts(self):
         """Valida diretório scripts/."""
         scripts_dir = self.caminho / 'scripts'

@@ -1,0 +1,53 @@
+{
+  "topic": "[PLACEHOLDER: domain-name]",
+  "study_bundle_path": "workspace/stage-a-study/YYYY-MM-DD/slug/",
+  "pipeline_mode": "full|abbreviated",
+  "certainty_profile": {
+    "absolute_truths": 0,
+    "strong_probable": 0,
+    "weak_probable": 0,
+    "popular_unvalidated": 0,
+    "undetermined": 0
+  },
+  "extracted_methodology": {
+    "process_map": "01-process-map.md",
+    "operational_principles": "02-operational-principles.md",
+    "tools_and_resources": "03-tools-and-resources.md",
+    "replicable_model": "04-replicable-model.md",
+    "validation_tests": "05-validation-tests.md"
+  },
+  "skill_recommendations": {
+    "architecture_pattern": "workflow|task-based|reference|capability-based",
+    "architecture_justification": "[PLACEHOLDER: Por que este padrao foi escolhido]",
+    "estimated_complexity": "simple|moderate|complex",
+    "suggested_references": [
+      {
+        "filename": "[PLACEHOLDER: nome-do-arquivo.md]",
+        "content_summary": "[PLACEHOLDER: O que deve conter]",
+        "source_claims": []
+      }
+    ],
+    "suggested_scripts": [
+      {
+        "filename": "[PLACEHOLDER: nome-do-script.py]",
+        "purpose": "[PLACEHOLDER: O que automatiza]",
+        "complexity": "simple|moderate"
+      }
+    ],
+    "antipatterns": [
+      {
+        "description": "[PLACEHOLDER: O que NAO fazer]",
+        "source": "controversia|ausencia|popular_sem_validacao",
+        "severity": "critico|alto|medio"
+      }
+    ],
+    "domain_knowledge_blocks": [
+      {
+        "topic": "[PLACEHOLDER: Sub-topico]",
+        "certainty": "absoluta|provavel_forte|provavel_fraca",
+        "claude_knows": false,
+        "include_in_skill": true
+      }
+    ]
+  }
+}
