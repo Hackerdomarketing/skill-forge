@@ -6,13 +6,24 @@ Combina design rigoroso com validacao empirica e pipeline de rigor epistemico.
 
 ## Instalacao
 
-### Passo 1 — Clonar na pasta de skills do Claude Code
+### Opcao A — Instalacao rapida (todas as skills de uma vez)
+
+```bash
+bash <(curl -sL https://raw.githubusercontent.com/Hackerdomarketing/skill-forge/main/scripts/instalar-skills.sh)
+```
+
+Isso instala o Skill Forge, Estudador e Criador de Projetos de uma vez, ja com os triggers configurados.
+
+### Opcao B — Apenas o Skill Forge
+
+
+#### Passo 1 — Clonar na pasta de skills do Claude Code
 
 ```bash
 git clone https://github.com/Hackerdomarketing/skill-forge.git ~/.claude/skills/skill-forge
 ```
 
-### Passo 2 — Instalar triggers de ativacao automatica
+#### Passo 2 — Instalar triggers de ativacao automatica
 
 ```bash
 python3 ~/.claude/skills/skill-forge/scripts/forge_deploy.py --setup
