@@ -1,0 +1,11 @@
+{
+  "version": "3.0",
+  "deployed_at": {
+    "~/meu-projeto-1": {
+      "date": "2026-03-08",
+      "claude_md": true,
+      "agents": ["construtor.md"],
+      "git_remote": "seu-usuario/meu-projeto-1.git"
+    }
+  }
+}

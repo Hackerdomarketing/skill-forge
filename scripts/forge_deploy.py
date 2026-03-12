@@ -9,8 +9,8 @@ Uso:
     forge_deploy.py --unregister /caminho/projeto
 
 Exemplos:
-    forge_deploy.py --project /Users/alfa/ECOSSISTEMA --dry-run
-    forge_deploy.py --project /Users/alfa/ECOSSISTEMA --git-push
+    forge_deploy.py --project ~/meu-projeto --dry-run
+    forge_deploy.py --project ~/meu-projeto --git-push
     forge_deploy.py --all --git-push
     forge_deploy.py --list
 
