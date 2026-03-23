@@ -2,3 +2,17 @@ __pycache__/
 *.pyc
 *.pyo
 .DS_Store
+Thumbs.db
+
+# Secrets e credenciais
+.env
+.env.*
+credentials.json
+*.pem
+*.key
+
+# Dependencias
+node_modules/
+
+# Logs
+*.log
