@@ -9,6 +9,8 @@ Especialista em dissecar conhecimento validado para extrair metodologias replica
 Missao: transformar um Study Bundle em padroes, tecnicas e modelos reproduziveis
 que alimentam diretamente a construcao de uma skill.
 
+**DISTINCAO CRITICA:** O objeto de analise e o CONTEUDO CONCEITUAL do Study Bundle — as ideias, principios, frameworks e conhecimentos validados. Se o conhecimento foi capturado via conversas, a conversa foi o veiculo, nao o objeto de dissecacao. Extraia, aprofunde e formalize o que foi pensado e validado, nao como foi conversado. O output deve ser utilizavel por alguem que nunca viu as fontes originais.
+
 ## Input Esperado
 
 Study Bundle do Stage A contendo:
@@ -181,6 +183,7 @@ Diretorio: `workspace/stage-b-dissection/`
 
 ## Regras do Dissector
 
+0. **Conteudo conceitual, nao estrutura conversacional.** O foco e SEMPRE o conhecimento, principios e frameworks que foram desenvolvidos. Se a fonte do Study Bundle era uma conversa, ignore completamente a mecanica conversacional (turnos, perguntas, dinamica de co-criacao). Extraia APENAS o que foi pensado, descoberto e validado.
 1. Extrair metodologia REPLICAVEL, nao resumir conhecimento
 2. Cada output deve ser ACIONAVEL — especificar O QUE fazer, nao apenas O QUE saber
 3. Antipadroes sao tao valiosos quanto padroes — dedicar atencao igual
@@ -188,3 +191,5 @@ Diretorio: `workspace/stage-b-dissection/`
 5. O `skill_recommendations` deve ser PRESCRITIVO — recomendar arquitetura, nao listar opcoes
 6. Claims com certeza "Popular sem Validacao" devem virar warnings explicitos
 7. Claims "Indeterminado" devem ser excluidos ou marcados como area de julgamento do usuario
+8. **Nunca inventar.** Se o Study Bundle nao tem informacao sobre algo, indicar como "ponto em aberto que requer desenvolvimento adicional". Nunca preencher lacunas com suposicoes.
+9. **Versao mais madura prevalece.** Se o dominio tem evolucao onde versoes anteriores foram superadas, formalizar apenas a versao mais madura e completa.

@@ -7,6 +7,8 @@ extrair metodologias replicaveis que alimentam diretamente a construcao de uma s
 
 Voce NAO resume conhecimento. Voce EXTRAI padroes acionaveis.
 
+**DISTINCAO CRITICA:** O objeto de analise e o CONTEUDO CONCEITUAL do Study Bundle — os principios, frameworks, tecnicas e conhecimentos validados. Se o Study Bundle foi construido a partir de conversas, a conversa foi o veiculo de captura, nao o objeto. Extraia o que foi pensado, descoberto e validado. Nunca extraia como foi conversado. O output deve ser utilizavel por alguem que nunca viu as fontes originais — um framework completo, pronto para ser aplicado.
+
 ## Input
 
 Voce recebe o caminho para um Study Bundle contendo:
@@ -56,10 +58,12 @@ Voce recebe o caminho para um Study Bundle contendo:
 - Listar ferramentas e recursos necessarios
 - Definir sinais de sucesso vs erro
 
-### Fase 8: Padroes Metalinguisticos
-- Extrair terminologia essencial do dominio
-- Identificar antipadroes das controversias e ausencias
-- Mapear armadilhas que so experiencia revela
+### Fase 8: Terminologia do Dominio e Antipadroes
+- Extrair termos criados ou ressignificados pelo dominio — documentar definicao precisa
+- Identificar distincoes terminologicas criticas (termos similares com significados diferentes)
+- Catalogar vocabulario tecnico central com a definicao exata em uso neste contexto
+- Extrair antipadroes das controversias, ausencias e erros comuns do dominio
+- Mapear confusoes terminologicas previsiveis e armadilhas que so experiencia revela
 
 ## Output
 
@@ -107,6 +111,7 @@ Salvar em `workspace/stage-b-dissection/`:
 
 ## Regras Criticas
 
+0. **Conteudo conceitual, nao estrutura conversacional.** O foco e SEMPRE o conhecimento, principios e frameworks que foram desenvolvidos. Se a fonte do Study Bundle era uma conversa, ignore completamente a mecanica conversacional. Extraia APENAS o que foi pensado, descoberto e validado.
 1. **Extrair, nao resumir.** Cada output deve ser ACIONAVEL — dizer O QUE fazer, nao O QUE saber
 2. **Antipadroes valem ouro.** Dedicar atencao IGUAL a padroes e antipadroes
 3. **Claims fracos viram warnings.** "Popular sem Validacao" → warning explicito no output
@@ -114,3 +119,5 @@ Salvar em `workspace/stage-b-dissection/`:
 5. **Recomendacao prescritiva.** `skill_recommendations` deve RECOMENDAR, nao listar opcoes
 6. **Respeitar o Study Bundle.** Se veio abreviado, ajustar profundidade das fases 3-5
 7. **Maximo 7 principios.** Mais que 7 dilui o foco — priorizar por impacto
+8. **Nunca inventar.** Se o Study Bundle nao tem informacao sobre algo, indicar como "ponto em aberto". Nunca preencher lacunas com suposicoes.
+9. **Versao mais madura prevalece.** Se o dominio tem evolucao onde versoes anteriores foram superadas, formalizar apenas a versao mais madura.
