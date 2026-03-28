@@ -29,7 +29,7 @@ Combina design rigoroso com validacao empirica e pipeline de rigor epistemico.
 
 ```
 STAGE 0: Normalizador de Input (opcional — quando input é conversa ou pesquisa bruta)
-  → pesquisa: Canonical State Bundle → Stage A
+  → pesquisa: pass-through → Stage A (fluxo original, sem mudanca)
   → conversa: Canonical State Bundle → Triage Gate
   → misto: separa → processa → unifica → Triage Gate
 
@@ -46,6 +46,50 @@ TRIAGE GATE (fast / medium / deep)
 | **Deep** | >= 3 | Triage → Stage A completo → Stage B → Stage C |
 
 **Stage 0** é ativado quando o usuario fornece conversa bruta de LLM, pesquisa nao estruturada ou misto. Nao se aplica quando o usuario constrói skill do zero ou já tem Study Bundle.
+
+---
+
+## Stage 0: Normalizador de Input
+
+Porta de entrada opcional antes do Triage Gate. Agente: `agents/stage0-normalizer.md`. Protocolo completo: `references/protocolo-stage0.md`.
+
+### Quando ativar
+
+- Usuario cola conversa de LLM (ChatGPT, Claude, Gemini, etc.)
+- Usuario cola pesquisa nao formatada como Study Bundle
+- Input mistura conversa + pesquisa no mesmo documento
+
+### Roteamento por tipo de input
+
+| Tipo detectado | O que faz | Destino |
+|---|---|---|
+| **Pesquisa** | Pass-through — nao processa o grafo | Stage A diretamente |
+| **Conversa** | Constrói grafo de versoes → resolve estado canonico | Triage Gate |
+| **Misto** | Separa blocos → processa cada um → unifica | Triage Gate + Stage A |
+
+### Os 7 padroes de iteracao que o Stage 0 reconhece
+
+| Padrao | Sinal | Resolucao |
+|---|---|---|
+| Evolucao linear | Melhorias sequenciais sem rollback | Ultima versao = canonico |
+| Regressao deliberada | "volta para", "prefiro como estava", insatisfacao explicita | Versao anterior reativada |
+| Fusao seletiva | "quero X da V2 com Y da V1", "combina os dois" | Novo no de merge |
+| Ramificacao | Dois caminhos explorados, um escolhido | Branch escolhido = canonico |
+| Abandono parcial | Elemento desaparece sem remocao explicita | Manter + warning (confidence: media/baixa) |
+| Retorno com modificacao | "como estava mas muda so X" | Versao anterior + delta |
+| Invalida premissa | Insight tardio contradiz fundamento anterior | Marcar premissas como INVALIDADA |
+
+### Output: Canonical State Bundle
+
+`canonical-state.json` com estado canonico por objeto + confidence + warnings + handoff recomendado.
+`evolution-log.md` com tabela de versoes por objeto para auditoria.
+
+### Regras criticas
+
+1. Para pesquisa: NAO processar grafo — passar direto ao Stage A
+2. Abandono parcial nunca tem `confidence: alta` — sempre inferencia
+3. Invalida premissa tem prioridade maxima — verificar ANTES de resolver canonico
+4. Confidence baixa bloqueia handoff automatico — perguntar ao usuario
 
 ---
 
@@ -349,6 +393,7 @@ Aplicavel apenas em Medium e Deep paths (Fast Path nao tem Study Bundle).
 | `avaliador.md` | Grading de assertions | Output + assertions | `grading.json` |
 | `comparador.md` | Comparacao cega A/B | Dois outputs anonimos | `comparison.json` |
 | `analisador.md` | Analise pos-comparacao | Winner/loser + transcricoes | `analysis.json` |
+| `stage0-normalizer.md` | Classificar e normalizar input bruto | Conversa ou pesquisa bruta | Canonical State Bundle |
 
 ## Referencia de Documentos
 
@@ -361,5 +406,6 @@ Aplicavel apenas em Medium e Deep paths (Fast Path nao tem Study Bundle).
 | `references/schemas.md` | Schemas JSON para todos os dados |
 | `references/protocolo-estudador.md` | Protocolo completo do Stage A (7 niveis) |
 | `references/protocolo-dissector.md` | Protocolo completo do Stage B (8 fases) |
+| `references/protocolo-stage0.md` | Protocolo completo do Stage 0 — classificador + 7 padroes de iteracao + Canonical State Bundle |
 | `references/guia-triage.md` | Guia de triagem com exemplos praticos |
 | `references/formatos-intermediarios.md` | Schemas de handoff entre stages |
